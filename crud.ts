@@ -1,4 +1,6 @@
+import { faker } from "@faker-js/faker";
 import { prisma } from "./lib/prisma";
+
 
 async function run() {
     // const createUser=await prisma.user.create({
@@ -95,20 +97,27 @@ async function run() {
 
     //! upsert
 
-    const upsertUser=await  prisma.user.upsert({
-        where:{
-            email:'new@gmail.com'
-        },
-        update:{
-            name:"nam ke tor"
-        },
-        create:{
-            name:"nam ke",
-            email:'new@gmail.com'
-        }
-    })
+    // const upsertUser=await  prisma.user.upsert({
+    //     where:{
+    //         email:'new@gmail.com'
+    //     },
+    //     update:{
+    //         name:"nam ke tor"
+    //     },
+    //     create:{
+    //         name:"nam ke",
+    //         email:'new@gmail.com'
+    //     }
+    // })
 
-    console.log(upsertUser);
+    // console.log(upsertUser);
 }
 
 run()
+
+
+const data=Array.from({length:100}).map(()=>({
+    firstName:faker.person.fullName()
+}))
+
+console.log(data);
