@@ -16,8 +16,19 @@ datasource db {
 model User{
   id Int @id @default(autoincrement())
   name String
+  role ROLE @default(user)
   email String @unique
+  post Post[]
+  profile Profile?
 }
+
+model Profile {
+  id Int @id @default(autoincrement())
+  bio String?
+  dateOfBirth DateTime?
+  userId Int @unique
+  user User @relation(fields: [userId],references: [id])
+} 
 
 model Post{
   id Int @id @default(autoincrement())
@@ -30,3 +41,11 @@ model Post{
   userId Int
   user User @relation(fields: [userId],references: [id])
 }
+
+enum ROLE{
+  user
+  admin
+}
+
+
+
